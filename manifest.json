@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Stream Now",
+  "name": "Stream It",
   "version": "1.0",
-  "description": "Find streaming options for movies and TV shows on IMDb and Google",
+  "description": "Add streaming options in IMDb and Google search results.",
   "host_permissions": [
     "https://www.imdb.com/*",
     "https://www.google.com/*"
@@ -14,7 +14,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "streamnow@hemantapkh.com"
+      "id": "streamit@hemantapkh.com"
     }
   },
   "content_scripts": [

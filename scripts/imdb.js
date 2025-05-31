@@ -37,7 +37,7 @@ function createStreamButton(existingButton) {
     textDiv.className = existingText.className;
     const innerDiv = document.createElement('div');
     innerDiv.className = existingText.firstElementChild.className;
-    innerDiv.textContent = 'Stream Now';
+    innerDiv.textContent = 'Stream It';
     textDiv.appendChild(innerDiv);
     streamButton.appendChild(textDiv);
 

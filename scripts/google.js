@@ -50,7 +50,7 @@ function addStreamIconToReviews(imdbId) {
     // Text span
     const textSpanElem = document.createElement('span');
     textSpanElem.className = textSpan.className;
-    textSpanElem.setAttribute('title', 'Stream Now');
+    textSpanElem.setAttribute('title', 'Stream It');
     textSpanElem.setAttribute('aria-hidden', 'true');
     textSpanElem.textContent = 'Stream';
     streamLink.appendChild(textSpanElem);
@@ -60,7 +60,7 @@ function addStreamIconToReviews(imdbId) {
     const innerDiv = document.createElement('div');
     innerDiv.className = contentDiv.firstElementChild.className;
     const innerSpan = document.createElement('span');
-    innerSpan.textContent = 'Stream Now';
+    innerSpan.textContent = 'Stream It';
     innerDiv.appendChild(innerSpan);
     contentDivElem.appendChild(innerDiv);
     streamLink.appendChild(contentDivElem);
