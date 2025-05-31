@@ -15,41 +15,55 @@ function extractIMDbId() {
 function addStreamIconToReviews(imdbId) {
     const reviewsSection = document.querySelector('div[data-attrid="kc:/film/film:reviews"]');
     if (!reviewsSection) return;
-
     const existingLink = reviewsSection.querySelector('a');
     if (!existingLink) return;
-
     const reviewsContainer = existingLink.closest('div');
     if (!reviewsContainer) return;
-
     if (reviewsContainer.querySelector('a[href*="stream.hemantapkh.com"]')) {
         return;
     }
-
     const streamLink = document.createElement('a');
     streamLink.href = `https://stream.hemantapkh.com?id=${imdbId}`;
     streamLink.className = existingLink.className;
     streamLink.setAttribute('role', 'link');
-    
     const existingSpans = existingLink.querySelectorAll('span');
     const iconSpan = existingSpans[0];
     const textSpan = existingSpans[1];
     const contentDiv = existingLink.querySelector('div');
-    
-    streamLink.innerHTML = `
-        <span class="${iconSpan.className}" aria-hidden="true">
-            <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="height:20px;width:20px;vertical-align:middle">
-                <path d="M8 5v14l11-7z" fill="#4285f4"/>
-            </svg>
-        </span>
-        <span class="${textSpan.className}" title="Stream Now" aria-hidden="true">Stream</span>
-        <div class="${contentDiv.className}">
-            <div class="${contentDiv.firstElementChild.className}">
-                <span>Stream Now</span>
-            </div>
-        </div>
-    `;
-
+    // Icon span
+    const iconSpanElem = document.createElement('span');
+    iconSpanElem.className = iconSpan.className;
+    iconSpanElem.setAttribute('aria-hidden', 'true');
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('focusable', 'false');
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.style.height = '20px';
+    svg.style.width = '20px';
+    svg.style.verticalAlign = 'middle';
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'M8 5v14l11-7z');
+    path.setAttribute('fill', '#4285f4');
+    svg.appendChild(path);
+    iconSpanElem.appendChild(svg);
+    streamLink.appendChild(iconSpanElem);
+    // Text span
+    const textSpanElem = document.createElement('span');
+    textSpanElem.className = textSpan.className;
+    textSpanElem.setAttribute('title', 'Stream Now');
+    textSpanElem.setAttribute('aria-hidden', 'true');
+    textSpanElem.textContent = 'Stream';
+    streamLink.appendChild(textSpanElem);
+    // Content div
+    const contentDivElem = document.createElement('div');
+    contentDivElem.className = contentDiv.className;
+    const innerDiv = document.createElement('div');
+    innerDiv.className = contentDiv.firstElementChild.className;
+    const innerSpan = document.createElement('span');
+    innerSpan.textContent = 'Stream Now';
+    innerDiv.appendChild(innerSpan);
+    contentDivElem.appendChild(innerDiv);
+    streamLink.appendChild(contentDivElem);
     reviewsContainer.appendChild(streamLink);
 }
 

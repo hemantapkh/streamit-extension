@@ -7,37 +7,46 @@ function extractIMDbId() {
 // Function to create stream button
 function createStreamButton(existingButton) {
     const streamButton = document.createElement('button');
-    
-    // Copy classes from the existing button
     streamButton.className = existingButton.className;
     streamButton.setAttribute('tabindex', '0');
     streamButton.setAttribute('aria-disabled', 'false');
-    
-    // Get the icon and text classes from the existing button
+
     const existingIcon = existingButton.querySelector('.ipc-icon');
     const existingText = existingButton.querySelector('.ipc-btn__text');
-    
     if (!existingIcon || !existingText || !existingText.firstElementChild) {
         return null;
     }
 
-    streamButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="${existingIcon.className}" viewBox="0 0 24 24" fill="currentColor" role="presentation">
-            <path d="M8 5v14l11-7z" fill="#4285f4"/>
-        </svg>
-        <div class="${existingText.className}">
-            <div class="${existingText.firstElementChild.className}">Stream Now</div>
-        </div>
-    `;
+    // SVG icon
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svg.setAttribute('width', '24');
+    svg.setAttribute('height', '24');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'currentColor');
+    svg.setAttribute('role', 'presentation');
+    svg.setAttribute('class', existingIcon.className);
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', 'M8 5v14l11-7z');
+    path.setAttribute('fill', '#4285f4');
+    svg.appendChild(path);
+    streamButton.appendChild(svg);
 
-    // Add click handler
+    // Text container
+    const textDiv = document.createElement('div');
+    textDiv.className = existingText.className;
+    const innerDiv = document.createElement('div');
+    innerDiv.className = existingText.firstElementChild.className;
+    innerDiv.textContent = 'Stream Now';
+    textDiv.appendChild(innerDiv);
+    streamButton.appendChild(textDiv);
+
     streamButton.addEventListener('click', () => {
         const imdbId = extractIMDbId();
         if (imdbId) {
             window.location.href = `https://stream.hemantapkh.com?id=${imdbId}`;
         }
     });
-
     return streamButton;
 }
 
