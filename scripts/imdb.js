@@ -44,7 +44,7 @@ function createStreamButton(existingButton) {
     streamButton.addEventListener('click', () => {
         const imdbId = extractIMDbId();
         if (imdbId) {
-            window.location.href = `https://streamit.hemantapkh.com?id=${imdbId}`;
+            window.location.href = `https://streamit.streamitplayer.com?id=${imdbId}`;
         }
     });
     return streamButton;
