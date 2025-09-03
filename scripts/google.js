@@ -19,11 +19,11 @@ function addStreamIconToReviews(imdbId) {
     if (!existingLink) return;
     const reviewsContainer = existingLink.closest('div');
     if (!reviewsContainer) return;
-    if (reviewsContainer.querySelector('a[href*="streamit.streamitplayer.com"]')) {
+    if (reviewsContainer.querySelector('a[href*="streamitplayer.pages.dev"]')) {
         return;
     }
     const streamLink = document.createElement('a');
-    streamLink.href = `https://streamit.streamitplayer.com?id=${imdbId}`;
+    streamLink.href = `https://streamitplayer.pages.dev?id=${imdbId}`;
     streamLink.className = existingLink.className;
     streamLink.setAttribute('role', 'link');
     const existingSpans = existingLink.querySelectorAll('span');
